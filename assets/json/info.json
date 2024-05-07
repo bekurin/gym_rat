@@ -1,10 +1,11 @@
 {
   "date": "2024-05-25",
   "title": "가슴",
+  "memo": "아침 일어나자마자 운동을 출발하니 힘이 별로 없어서 운동 집중이 잘 안된다.",
   "exercises": [
     {
       "name": "벤치 프레스",
-      "sets": [
+      "rounds": [
         {
           "type": "WARM_UP",
           "weight": 80,
@@ -29,7 +30,7 @@
     },
     {
       "name": "인클라인 덤벨 프레스",
-      "sets": [
+      "rounds": [
         {
           "type": "WARM_UP",
           "weight": 20,
