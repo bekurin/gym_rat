@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:gym_rat/model/exercise.dart';
 
 class Workout {
@@ -24,5 +23,12 @@ class Workout {
       memo: json["memo"],
       exercises: exercises,
     );
+  }
+
+  int getTotalWeight() {
+    return exercises
+        .expand((exercise) => exercise.rounds)
+        .map((round) => round.weight)
+        .reduce((weight, totalWeight) => weight + totalWeight);
   }
 }

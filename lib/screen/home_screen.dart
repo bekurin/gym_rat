@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_rat/component/main_calendar/main_calendar.dart';
-import 'package:gym_rat/component/schedule_card/schedule_card.dart';
+import 'package:gym_rat/component/schedule_card/workout_card.dart';
+import 'package:gym_rat/const/texts.dart';
 import 'package:gym_rat/repository/workout_repository.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("짐쟁이")),
+      appBar: AppBar(title: const Text(HOME_SCREEN_TITLE)),
       body: SafeArea(
         child: Column(
           children: [
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                return ScheduleCard(workout: snapshot.data!);
+                return WorkoutCard(workout: snapshot.data!);
               },
             )
           ],
