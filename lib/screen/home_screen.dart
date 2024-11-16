@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_rat/component/main_calendar/main_calendar.dart';
-import 'package:gym_rat/component/schedule_card/workout_card.dart';
 import 'package:gym_rat/const/texts.dart';
-import 'package:gym_rat/repository/workout_repository.dart';
+import 'package:gym_rat/screen/tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,46 +11,60 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
   DateTime selectedDate = DateTime.now();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text(HOME_SCREEN_TITLE)),
-      body: SafeArea(
-        child: Column(
-          children: [
-            MainCalendar(
-              selectedDate: selectedDate,
-              onDaySelected: onDaySelected,
-            ),
-            FutureBuilder(
-              future: WorkoutRepository.getWorkout(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.error.toString()),
-                  );
-                }
-
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                return WorkoutCard(workout: snapshot.data!);
-              },
-            )
-          ],
-        ),
-      ),
-    );
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
-  void onDaySelected(DateTime selectedDate, DateTime focusedDate) {
+  void _onDaySelected(DateTime selectedDate, DateTime focusedDate) {
     setState(() {
       this.selectedDate = selectedDate;
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> children = [
+      Center(
+        child: SafeArea(
+          child: Column(
+            children: [
+              MainCalendar(
+                selectedDate: selectedDate,
+                onDaySelected: _onDaySelected,
+              ),
+            ],
+          ),
+        ),
+      ),
+      const Center(child: TabScreen()),
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text(HOME_SCREEN_TITLE)),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: children,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+        ],
+      ),
+    );
   }
 }

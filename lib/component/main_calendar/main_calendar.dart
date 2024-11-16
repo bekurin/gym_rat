@@ -45,20 +45,8 @@ class MainCalendar extends StatelessWidget {
               TextStyle(fontWeight: FontWeight.w600, color: DARK_GRAY_COLOR),
           weekendTextStyle:
               TextStyle(fontWeight: FontWeight.w600, color: DARK_GRAY_COLOR),
-          selectedTextStyle:
-              TextStyle(fontWeight: FontWeight.w600, color: PRIMARY_COLOR)),
-    );
-  }
-
-  Widget _buildEventsMarker(DateTime date) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 1.0),
-      width: 7.0,
-      height: 7.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.blue,
-      ),
+          selectedTextStyle: const TextStyle(
+              fontWeight: FontWeight.w600, color: PRIMARY_COLOR)),
     );
   }
 }
