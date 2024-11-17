@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gym_rat/component/main_calendar/main_calendar.dart';
+import 'package:gym_rat/component/main_calendar/index.dart';
 import 'package:gym_rat/const/texts.dart';
-import 'package:gym_rat/screen/tab_screen.dart';
+import 'package:gym_rat/screen/select_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,14 +41,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      const Center(child: TabScreen()),
+      const Center(
+        child: SafeArea(child: SelectScreen()),
+      ),
+      const Center(
+        child: Text("만드는 중"),
+      )
     ];
 
     return Scaffold(
       appBar: AppBar(title: const Text(HOME_SCREEN_TITLE)),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: children,
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: IndexedStack(
+          index: _currentIndex,
+          children: children,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -57,11 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: '메인',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label: '루틴 생성',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.yard),
+            label: '운동 시작',
           ),
         ],
       ),

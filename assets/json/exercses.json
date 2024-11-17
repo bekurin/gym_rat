@@ -1,0 +1,131 @@
+{
+  "items": [
+    {
+      "agonist": "가슴",
+      "equipments": [
+        {
+          "bodyweights": [
+            {
+              "id": 1,
+              "name": "푸쉬업",
+              "antagonist": "삼두"
+            }
+          ]
+        },
+        {
+          "dumbbells": [
+            {
+              "id": 2,
+              "name": "인클라인 덤벨 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 3,
+              "name": "덤벨 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 4,
+              "name": "디클라인 덤벨 프레스",
+              "antagonist": "삼두"
+            }
+          ]
+        },
+        {
+          "machines": [
+            {
+              "id": 5,
+              "name": "인클라인 체스트 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 6,
+              "name": "체스트 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 7,
+              "name": "디클라인 체스트 프레스",
+              "antagonist": "삼두"
+            }
+          ]
+        },
+        {
+          "babels": [
+            {
+              "id": 8,
+              "name": "인클라인 바벨 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 9,
+              "name": "벤치 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 10,
+              "name": "디클라인 바벨 프레스",
+              "antagonist": "삼두"
+            },
+            {
+              "id": 11,
+              "name": "디클라인 바벨 프레스",
+              "antagonist": "삼두"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "agonist": "등",
+      "equipments": [
+        {
+          "bodyweight": []
+        },
+        {
+          "dumbbell": []
+        },
+        {
+          "machine": []
+        },
+        {
+          "babel": []
+        }
+      ]
+    },
+    {
+      "agonist": "하체",
+      "equipments": [
+        {
+          "bodyweight": []
+        },
+        {
+          "dumbbell": []
+        },
+        {
+          "machine": []
+        },
+        {
+          "babel": []
+        }
+      ]
+    },
+    {
+      "agonist": "어깨",
+      "equipments": [
+        {
+          "bodyweight": []
+        },
+        {
+          "dumbbell": []
+        },
+        {
+          "machine": []
+        },
+        {
+          "babel": []
+        }
+      ]
+    }
+  ]
+}

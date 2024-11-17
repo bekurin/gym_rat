@@ -3,10 +3,10 @@ import 'package:gym_rat/component/schedule_card/content.dart';
 import 'package:gym_rat/const/colors.dart';
 import 'package:gym_rat/model/workout.dart';
 
-class WorkoutCard extends StatelessWidget {
+class ScheduleCard extends StatelessWidget {
   final Workout workout;
 
-  const WorkoutCard({super.key, required this.workout});
+  const ScheduleCard({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class WorkoutCard extends StatelessWidget {
         child: Row(
           children: [
             Content(content: workout.title),
-            VerticalDivider(color: PRIMARY_COLOR),
+            const VerticalDivider(color: PRIMARY_COLOR),
             Content(content: workout.memo),
-            VerticalDivider(color: PRIMARY_COLOR),
+            const VerticalDivider(color: PRIMARY_COLOR),
             Content(content: "${workout.getTotalWeight()} kg")
           ],
         ),
