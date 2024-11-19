@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gym_rat/component/exercise_list/index.dart';
 import 'package:gym_rat/component/infinite_tab/index.dart';
+import 'package:gym_rat/model/exercise.dart';
 
 class SelectScreen extends StatefulWidget {
   const SelectScreen({super.key});
@@ -15,7 +16,7 @@ class SelectScreen extends StatefulWidget {
 class _SelectScreenState extends State<SelectScreen> {
   String _muscle = "전체";
   String _equipment = "전체";
-  Map<String, List<String>> exercises = {};
+  Map<String, Exercise> _exercises = {};
 
   final List<String> muscleGroups = ["전체", "가슴", "등", "하체", "어깨"];
   final List<String> equipmentTypes = ["전체", "머신", "맨몸", "덤벨", "바벨"];
@@ -28,31 +29,39 @@ class _SelectScreenState extends State<SelectScreen> {
 
   Future<void> _loadExercises() async {
     final String response =
-        await rootBundle.loadString('assets/exercises.json');
+        await rootBundle.loadString('assets/json/exercises.json');
     final data = json.decode(response) as Map<String, dynamic>;
+
+    final exercises = Map<String, Exercise>.fromEntries(
+      (data["items"] as List).map((item) {
+        final exercise = Exercise.fromJson(item as Map<String, dynamic>);
+        return MapEntry(exercise.agonist, exercise);
+      }),
+    );
+
     setState(() {
-      exercises =
-          data.map((key, value) => MapEntry(key, List<String>.from(value)));
+      _exercises = exercises;
     });
   }
 
-  List<String> getFilteredExercises() {
-    final key = "$_muscle-$_equipment";
-    return exercises[key] ?? exercises["전체-전체"]!;
+  Exercise? getFilteredExercises() {
+    print(_exercises[_muscle]
+        ?.getAllWorkout()
+        .map((item) => item.name)
+        .toString());
+    return _exercises[_muscle];
   }
 
   void _onMuscleSelected(String muscle) {
     setState(() {
       _muscle = muscle;
     });
-    print("$_muscle-$_equipment");
   }
 
   void _onEquipmentSelected(String equipment) {
     setState(() {
       _equipment = equipment;
     });
-    print("$_muscle-$_equipment");
   }
 
   @override
@@ -75,9 +84,9 @@ class _SelectScreenState extends State<SelectScreen> {
             onItemSelected: _onEquipmentSelected,
           ),
           const SizedBox(height: 24),
-          exercises.isEmpty
+          _exercises.isEmpty
               ? const Center(child: CircularProgressIndicator())
-              : ExerciseList(exercises: getFilteredExercises()),
+              : ExerciseList(exercise: getFilteredExercises()),
         ],
       ),
     );

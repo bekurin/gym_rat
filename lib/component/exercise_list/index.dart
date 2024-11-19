@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:gym_rat/model/exercise.dart';
 
 class ExerciseList extends StatelessWidget {
-  final List<String> exercises;
+  final Exercise? exercise;
 
-  const ExerciseList({super.key, required this.exercises});
+  const ExerciseList({super.key, required this.exercise});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        itemCount: exercises.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(exercises[index]),
-          );
-        },
+      child: ListView(
+        children: exercise
+                ?.getAllWorkout()
+                .map((workout) => ListTile(
+                      title: Text(workout.name),
+                    ))
+                .toList() ??
+            List.empty(),
       ),
     );
   }
