@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gym_rat/component/main_calendar/index.dart';
+import 'package:gym_rat/component/workout_record_card/index.dart';
 import 'package:gym_rat/const/texts.dart';
+import 'package:gym_rat/model/workout_record.dart';
 import 'package:gym_rat/screen/select_screen.dart';
+import 'package:gym_rat/service/workout_record_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   DateTime selectedDate = DateTime.now();
+  WorkoutRecord? selectedRecord;
 
   void _onTabTapped(int index) {
     setState(() {
@@ -20,9 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _onDaySelected(DateTime selectedDate, DateTime focusedDate) {
+  Future<void> _onDaySelected(
+      DateTime selectedDate, DateTime focusedDate) async {
     setState(() {
       this.selectedDate = selectedDate;
+    });
+
+    final record = await WorkoutRecordService.getRecordForDate(selectedDate);
+    setState(() {
+      selectedRecord = record;
     });
   }
 
@@ -37,6 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 selectedDate: selectedDate,
                 onDaySelected: _onDaySelected,
               ),
+              if (selectedRecord != null)
+                WorkoutRecordCard(record: selectedRecord!)
+              else
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text('이 날의 운동 기록이 없습니다.'),
+                ),
             ],
           ),
         ),
